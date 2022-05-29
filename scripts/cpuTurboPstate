@@ -1,0 +1,25 @@
+
+control_path=/sys/devices/system/cpu/intel_pstate/no_turbo
+
+
+if [ "$#" -eq  "0" ]
+  then
+    echo -e "ERROR: No arguments supplied, please provide a valid argument:"
+    echo -e "> -enable\n\tEnable Boost"
+    echo -e "> -disable\n\tDisable boost"
+
+else
+    case "$1" in
+        -enable )
+	    echo 0 | sudo tee $control_path
+        ;;
+        -disable )
+	    echo 1 | sudo tee $control_path            
+        ;;
+        *)
+            echo "Please provide a valid argument"
+            echo -e "> -enable\n\tEnable Boost"
+            echo -e "> -disable\n\tDisable boost"
+        ;;
+    esac 
+fi
